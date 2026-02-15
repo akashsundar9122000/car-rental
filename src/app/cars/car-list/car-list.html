@@ -1,0 +1,51 @@
+<div class="p-6">
+    <header class="mb-8 flex justify-between items-center">
+        <div>
+            <h1 class="text-3xl font-bold text-white mb-2">Available Vehicles</h1>
+            <p class="text-gray-400">Select a premium vehicle for your journey</p>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (car of cars; track car.id) {
+        <div
+            class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 group">
+            <div class="relative h-48 overflow-hidden">
+                <img [src]="car.imageUrl" [alt]="car.name"
+                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                <div
+                    class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-gray-600">
+                    <span class="text-green-400 font-bold">₹{{getDefaultVariant(car.id)?.pricePerDay}}</span>
+                    <span class="text-gray-300 text-xs">/day</span>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">{{car.brand}} {{car.name}}</h3>
+                        <p class="text-gray-400 text-sm">{{getDefaultVariant(car.id)?.transmission}} •
+                            {{getDefaultVariant(car.id)?.fuelType}}</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-1">
+                        <div class="bg-gray-700 px-2 py-1 rounded text-xs text-gray-300">
+                            {{getDefaultVariant(car.id)?.seats}} Seats
+                        </div>
+                        <div *ngIf="car.variants.length > 1"
+                            class="bg-blue-600/20 border border-blue-600/50 px-2 py-1 rounded text-xs text-blue-400">
+                            {{car.variants.length}} Variants
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex gap-2">
+                    <a [routerLink]="['/cars', car.id]"
+                        class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-center py-2 rounded-lg transition-colors duration-200 font-medium">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

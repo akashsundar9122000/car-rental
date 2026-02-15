@@ -1,0 +1,217 @@
+<div class="min-h-screen bg-black text-white p-6 selection:bg-red-600 selection:text-white">
+    <div class="max-w-2xl mx-auto">
+
+        <!-- Payment Method Selection -->
+        <div *ngIf="showForm && !processing && !success" class="animate-[fadeIn_0.5s_ease-out]">
+            <h1 class="text-3xl font-black uppercase italic mb-2 text-center">Secure Payment</h1>
+            <p class="text-gray-500 text-center text-sm mb-8">SELECT YOUR PREFERRED METHOD</p>
+
+            <!-- Payment Methods Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                <button (click)="selectMethod('card')"
+                    [class]="selectedMethod === 'card' ? 'bg-red-600 border-red-600' : 'bg-gray-900/50 border-gray-800 hover:border-red-900'"
+                    class="p-6 rounded-xl border-2 transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2"
+                        [class]="selectedMethod === 'card' ? 'text-white' : 'text-gray-400 group-hover:text-red-500'"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                    <p class="text-xs font-bold uppercase">Card</p>
+                </button>
+
+                <button (click)="selectMethod('upi')"
+                    [class]="selectedMethod === 'upi' ? 'bg-red-600 border-red-600' : 'bg-gray-900/50 border-gray-800 hover:border-red-900'"
+                    class="p-6 rounded-xl border-2 transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2"
+                        [class]="selectedMethod === 'upi' ? 'text-white' : 'text-gray-400 group-hover:text-red-500'"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                    </svg>
+                    <p class="text-xs font-bold uppercase">UPI</p>
+                </button>
+
+                <button (click)="selectMethod('googlepay')"
+                    [class]="selectedMethod === 'googlepay' ? 'bg-red-600 border-red-600' : 'bg-gray-900/50 border-gray-800 hover:border-red-900'"
+                    class="p-6 rounded-xl border-2 transition-all group">
+                    <div class="h-8 w-8 mx-auto mb-2 flex items-center justify-center">
+                        <span
+                            [class]="selectedMethod === 'googlepay' ? 'text-white' : 'text-gray-400 group-hover:text-red-500'"
+                            class="text-2xl font-black">G</span>
+                    </div>
+                    <p class="text-xs font-bold uppercase">GPay</p>
+                </button>
+
+                <button (click)="selectMethod('phonepe')"
+                    [class]="selectedMethod === 'phonepe' ? 'bg-red-600 border-red-600' : 'bg-gray-900/50 border-gray-800 hover:border-red-900'"
+                    class="p-6 rounded-xl border-2 transition-all group">
+                    <div class="h-8 w-8 mx-auto mb-2 flex items-center justify-center">
+                        <span
+                            [class]="selectedMethod === 'phonepe' ? 'text-white' : 'text-gray-400 group-hover:text-red-500'"
+                            class="text-2xl font-black">P</span>
+                    </div>
+                    <p class="text-xs font-bold uppercase">PhonePe</p>
+                </button>
+
+                <button (click)="selectMethod('netbanking')"
+                    [class]="selectedMethod === 'netbanking' ? 'bg-red-600 border-red-600' : 'bg-gray-900/50 border-gray-800 hover:border-red-900'"
+                    class="p-6 rounded-xl border-2 transition-all group col-span-2 md:col-span-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2"
+                        [class]="selectedMethod === 'netbanking' ? 'text-white' : 'text-gray-400 group-hover:text-red-500'"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                    </svg>
+                    <p class="text-xs font-bold uppercase">Net Banking</p>
+                </button>
+            </div>
+
+            <!-- Payment Forms -->
+            <div *ngIf="selectedMethod" class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+                <!-- Card Form -->
+                <form *ngIf="selectedMethod === 'card'" [formGroup]="cardForm" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Card
+                            Number</label>
+                        <input type="text" formControlName="cardNumber" maxlength="16" placeholder="1234 5678 9012 3456"
+                            class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono">
+                        <div *ngIf="cardForm.get('cardNumber')?.invalid && cardForm.get('cardNumber')?.touched"
+                            class="text-red-500 text-[10px] mt-1 font-mono">
+                            16-DIGIT CARD NUMBER REQUIRED
+                        </div>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Cardholder
+                            Name</label>
+                        <input type="text" formControlName="cardName" placeholder="JOHN DOE"
+                            class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono uppercase">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Expiry
+                                (MM/YY)</label>
+                            <input type="text" formControlName="expiryDate" placeholder="12/25" maxlength="5"
+                                class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono">
+                        </div>
+                        <div>
+                            <label
+                                class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">CVV</label>
+                            <input type="password" formControlName="cvv" placeholder="123" maxlength="3"
+                                class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono">
+                        </div>
+                    </div>
+                </form>
+
+                <!-- UPI Form -->
+                <form *ngIf="selectedMethod === 'upi'" [formGroup]="upiForm" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">UPI
+                            ID</label>
+                        <input type="text" formControlName="upiId" placeholder="username@upi"
+                            class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono">
+                        <div *ngIf="upiForm.get('upiId')?.invalid && upiForm.get('upiId')?.touched"
+                            class="text-red-500 text-[10px] mt-1 font-mono">
+                            VALID UPI ID REQUIRED
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Net Banking Form -->
+                <form *ngIf="selectedMethod === 'netbanking'" [formGroup]="netBankingForm" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Select
+                            Bank</label>
+                        <select formControlName="bankName"
+                            class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all font-mono">
+                            <option value="">Choose Bank</option>
+                            <option value="sbi">State Bank of India</option>
+                            <option value="hdfc">HDFC Bank</option>
+                            <option value="icici">ICICI Bank</option>
+                            <option value="axis">Axis Bank</option>
+                            <option value="kotak">Kotak Mahindra Bank</option>
+                        </select>
+                    </div>
+                </form>
+
+                <!-- Google Pay / PhonePe Message -->
+                <div *ngIf="selectedMethod === 'googlepay' || selectedMethod === 'phonepe'" class="text-center py-8">
+                    <p class="text-gray-400 mb-4">You will be redirected to {{ selectedMethod === 'googlepay' ? 'Google
+                        Pay' : 'PhonePe' }} app</p>
+                    <div class="w-16 h-16 mx-auto bg-gray-800 rounded-full flex items-center justify-center">
+                        <span class="text-3xl">{{ selectedMethod === 'googlepay' ? '📱' : '💳' }}</span>
+                    </div>
+                </div>
+
+                <button (click)="processPayment()"
+                    class="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 uppercase tracking-widest text-sm">
+                    Pay Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Processing State -->
+        <div *ngIf="processing" class="space-y-8 animate-[fadeIn_0.5s_ease-out] text-center">
+            <div class="relative w-32 h-32 mx-auto">
+                <div class="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
+                <div
+                    class="absolute inset-0 border-4 border-t-red-600 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-600 animate-pulse" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-black uppercase tracking-widest text-white mb-2 animate-pulse">Processing
+                    Payment...</h2>
+                <p class="text-gray-500 font-mono text-xs">ENCRYPTING TRANSACTION // DO NOT CLOSE</p>
+            </div>
+
+            <div class="w-full bg-gray-900 h-1 overflow-hidden rounded-full">
+                <div class="h-full bg-red-600 animate-[progress_3s_ease-in-out] w-full origin-left"></div>
+            </div>
+        </div>
+
+        <!-- Success State -->
+        <div *ngIf="success" class="space-y-8 animate-[fadeIn_0.5s_ease-out] text-center">
+            <div class="relative w-32 h-32 mx-auto">
+                <div class="absolute inset-0 bg-green-500/20 rounded-full blur-xl animate-pulse"></div>
+                <div
+                    class="relative z-10 w-full h-full bg-black border-2 border-green-500 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-black uppercase italic text-white mb-2">Payment Successful!</h2>
+                <p class="text-green-500 font-bold tracking-widest text-sm">TRANSACTION COMPLETE. MISSION AUTHORIZED.
+                </p>
+            </div>
+
+            <p class="text-gray-500 text-xs mt-4">Redirecting to home in 5 seconds...</p>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    @keyframes progress {
+        0% {
+            transform: scaleX(0);
+        }
+
+        100% {
+            transform: scaleX(1);
+        }
+    }
+</style>
