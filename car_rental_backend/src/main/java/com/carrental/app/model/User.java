@@ -25,6 +25,8 @@ public class User {
 
     private String fullName;
 
+    private String mobileNumber;
+
     @Column(nullable = false)
     private String role = "USER";
 
@@ -64,6 +66,14 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getRole() {
