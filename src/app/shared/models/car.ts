@@ -9,6 +9,13 @@ export interface CarVariant {
     features: string[];
     driveType?: 'RWD' | 'FWD' | '4x4' | '4x2';
     engineCapacity?: string;
+    car?: Car;
+}
+
+export interface Admin {
+    id: string;
+    email: string;
+    fullName: string;
 }
 
 export interface Car {
@@ -19,4 +26,11 @@ export interface Car {
     description: string;
     variants: CarVariant[];
     defaultVariantId: string;
+    admin?: Admin;
+}
+
+export interface CarScrapeResult {
+    imageUrl: string;
+    description: string;
+    variants: CarVariant[];
 }

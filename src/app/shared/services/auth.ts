@@ -1,48 +1,95 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, signal, inject } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface User {
   id: string;
-  username: string;
   email: string;
   fullName: string;
-  mobileNumber: string;
+  role?: string;
+  // properties present in frontend interface but missing in backend
+  username?: string;
+  mobileNumber?: string;
+  password?: string; // for signup request
+  token?: string; // Basic Auth token (base64 email:password)
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private http = inject(HttpClient);
+  private readonly API_URL = `${environment.apiUrl}/auth`;
   private readonly USER_KEY = 'car_rental_user';
+
   currentUser = signal<User | null>(this.getUserFromStorage());
 
   constructor() { }
 
-  login(email: string, password: string): boolean {
-    // In a real app, we would verify password here. 
-    // For now, we simulate a successful login if email is provided.
-    // We'll create a mock user if one doesn't exist in local storage for this email, 
-    // or just retrieve the last signed up user if emails match (simple mock logic).
-
-    let user = this.getUserFromStorage();
-
-    // Simple mock: if no user stored, or stored user has different email, create a temp one
-    if (!user || user.email !== email) {
-      user = {
-        id: 'mock-id-' + Math.floor(Math.random() * 1000),
-        username: email.split('@')[0],
-        email: email,
-        fullName: 'Driver ' + email.split('@')[0],
-        mobileNumber: '0000000000'
-      };
-    }
-
-    this.saveUserToStorage(user);
-    return true;
+  login(email: string, password: string) {
+    return this.http.post<User>(`${this.API_URL}/login`, { email, password }).pipe(
+      tap(user => {
+        const token = btoa(`${email}:${password}`);
+        const userWithToken = { ...user, token };
+        this.saveUserToStorage(userWithToken);
+      })
+    );
   }
 
-  signup(user: User): boolean {
-    this.saveUserToStorage(user);
-    return true;
+  adminLogin(email: string, password: string) {
+    return this.http.post<User>(`${environment.apiUrl}/admin/auth/login`, { email, password }).pipe(
+      tap(user => {
+        const token = btoa(`${email}:${password}`);
+        // Ensure role is explicitly ADMIN in storage
+        const userWithToken = { ...user, token, role: 'ADMIN' };
+        this.saveUserToStorage(userWithToken);
+      })
+    );
+  }
+
+  signup(user: User) {
+    return this.http.post<User>(`${this.API_URL}/signup`, {
+      email: user.email,
+      password: user.password,
+      fullName: user.fullName
+    }).pipe(
+      tap(savedUser => {
+        if (user.password) {
+          const token = btoa(`${user.email}:${user.password}`);
+          const userWithToken = { ...savedUser, token };
+          this.saveUserToStorage(userWithToken);
+        } else {
+          this.saveUserToStorage(savedUser);
+        }
+      })
+    );
+  }
+
+  adminSignup(user: User) {
+    return this.http.post<User>(`${environment.apiUrl}/admin/auth/signup`, {
+      email: user.email,
+      password: user.password,
+      fullName: user.fullName
+    }).pipe(
+      tap(savedUser => {
+        if (user.password) {
+          const token = btoa(`${user.email}:${user.password}`);
+          const userWithToken = { ...savedUser, token, role: 'ADMIN' };
+          this.saveUserToStorage(userWithToken);
+        } else {
+          this.saveUserToStorage({ ...savedUser, role: 'ADMIN' });
+        }
+      })
+    );
+  }
+
+  getAuthHeaders() {
+    const user = this.currentUser();
+    if (user && user.token) {
+      return { Authorization: `Basic ${user.token}` };
+    }
+    return {};
   }
 
   logout(): void {
@@ -62,5 +109,21 @@ export class AuthService {
   private saveUserToStorage(user: User): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.currentUser.set(user);
+  }
+
+  deleteAccount(password: string): Observable<void> {
+    return this.http.request<void>('DELETE', `${this.API_URL}/account`, {
+      body: { password }
+    }).pipe(
+      tap(() => this.logout())
+    );
+  }
+
+  deleteAdminAccount(password: string): Observable<void> {
+    return this.http.request<void>('DELETE', `${environment.apiUrl}/admin/auth/account`, {
+      body: { password }
+    }).pipe(
+      tap(() => this.logout())
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
@@ -127,25 +127,36 @@ export class BookingComponent implements OnInit {
         return null;
     };
 
+    private cdr = inject(ChangeDetectorRef);
+
     onSubmit() {
-        if (this.bookingForm.valid && this.car) {
+        if (this.bookingForm.valid && this.car && this.selectedVariant) {
             console.log('Booking Data:', {
-                carId: this.car?.id,
+                variantId: this.selectedVariant.id,
                 ...this.bookingForm.value
             });
 
             this.bookingService.addBooking({
-                car: this.car,
+                carId: this.car.id,
+                variant: this.selectedVariant,
                 startDate: this.bookingForm.value.startDate,
                 endDate: this.bookingForm.value.endDate,
                 source: this.bookingForm.value.source,
                 destination: this.bookingForm.value.destination,
                 totalPrice: this.totalPrice,
                 isDriverNeeded: this.bookingForm.value.isDriverNeeded
+            }).subscribe({
+                next: () => {
+                    this.isBooked = true;
+                    this.cdr.detectChanges();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+                error: (err) => {
+                    console.error('Booking failed', err);
+                    this.cdr.detectChanges();
+                    // Handle error appropriately, maybe set a flag to show an error message
+                }
             });
-
-            this.isBooked = true;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             this.bookingForm.markAllAsTouched();
         }

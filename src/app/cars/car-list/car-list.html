@@ -1,47 +1,118 @@
-<div class="p-6">
-    <header class="mb-8 flex justify-between items-center">
+<div class="p-6 max-w-7xl mx-auto pb-24 md:pb-6">
+    <header class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-white mb-2">Available Vehicles</h1>
-            <p class="text-gray-400">Select a premium vehicle for your journey</p>
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-1 tracking-tight">Available Vehicles</h1>
+            <p class="text-gray-500 dark:text-gray-400 font-medium">Select a premium vehicle for your journey</p>
+        </div>
+
+        <div class="flex w-full md:w-auto items-center gap-3">
+            <!-- Search Bar -->
+            <div class="relative w-full md:w-64 lg:w-80">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input type="text" [(ngModel)]="searchTerm" placeholder="Search by brand or model..."
+                    class="block w-full pl-10 pr-3 py-2 border border-gray-200 dark:border-gray-600 rounded-2xl leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-black dark:focus:border-white sm:text-sm transition duration-150 ease-in-out shadow-sm">
+            </div>
+
+            <!-- Filter Button -->
+            <button
+                class="bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 shadow-sm hover:shadow text-gray-900 dark:text-gray-100 p-2.5 rounded-2xl transition-all shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </button>
         </div>
     </header>
 
+    <!-- Category Pills -->
+    <div class="mb-8 flex overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 gap-3 scrollbar-hide">
+        @for (cat of categories; track cat) {
+        <button (click)="setCategory(cat)" [class]
+            Birdseye="activeCategory() === cat ? 'bg-black text-white dark:bg-white dark:text-black border-transparent shadow-md' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'"
+            class="px-5 py-2.5 rounded-full border text-sm font-semibold whitespace-nowrap transition-all duration-200 active:scale-95">
+            {{cat}}
+        </button>
+        }
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (car of cars; track car.id) {
-        <div
-            class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 group">
-            <div class="relative h-48 overflow-hidden">
+        @for (car of filteredCars(); track car.id; let i = $index) {
+        <div class="bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 group flex flex-col hover:-translate-y-1 opacity-0 animate-fade-in-up"
+            [style.animation-delay]="(i * 100) + 'ms'">
+            <div class="relative h-56 md:h-64 overflow-hidden rounded-t-[2rem]">
                 <img [src]="car.imageUrl" [alt]="car.name"
-                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
+
+                <!-- Price Badge -->
                 <div
-                    class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-gray-600">
-                    <span class="text-green-400 font-bold">₹{{getDefaultVariant(car.id)?.pricePerDay}}</span>
-                    <span class="text-gray-300 text-xs">/day</span>
+                    class="absolute top-4 right-4 bg-white/90 dark:bg-gray-700/90 backdrop-blur-md px-4 py-1.5 rounded-full border border-gray-100 dark:border-gray-600 shadow-sm flex items-center">
+                    <span
+                        class="text-gray-900 dark:text-gray-100 font-black">₹{{getDefaultVariant(car.id)?.pricePerDay}}</span>
+                    <span class="text-gray-500 dark:text-gray-300 text-xs font-semibold ml-1">/day</span>
                 </div>
+
+                <!-- Favorite Button -->
+                <button (click)="toggleFavorite($event, car.id)"
+                    class="absolute top-4 left-4 p-2.5 rounded-full backdrop-blur-md transition-all z-10 hover:scale-110 shadow-sm border border-transparent"
+                    [class]="isFavorite(car.id) ? 'bg-red-50 dark:bg-red-900/30 border-red-100 dark:border-red-800/50 text-red-500 dark:text-red-400' : 'bg-white/80 dark:bg-gray-700/80 text-gray-400 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400'">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors"
+                        [attr.fill]="isFavorite(car.id) ? 'currentColor' : 'none'" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                </button>
             </div>
 
-            <div class="p-5">
-                <div class="flex justify-between items-start mb-2">
+            <div class="p-6 flex flex-col flex-1">
+                <div class="flex justify-between items-start mb-4">
                     <div>
-                        <h3 class="text-xl font-bold text-white">{{car.brand}} {{car.name}}</h3>
-                        <p class="text-gray-400 text-sm">{{getDefaultVariant(car.id)?.transmission}} •
-                            {{getDefaultVariant(car.id)?.fuelType}}</p>
-                    </div>
-                    <div class="flex flex-col items-end gap-1">
-                        <div class="bg-gray-700 px-2 py-1 rounded text-xs text-gray-300">
-                            {{getDefaultVariant(car.id)?.seats}} Seats
-                        </div>
-                        <div *ngIf="car.variants.length > 1"
-                            class="bg-blue-600/20 border border-blue-600/50 px-2 py-1 rounded text-xs text-blue-400">
-                            {{car.variants.length}} Variants
+                        <h3 class="text-2xl font-black text-gray-900 dark:text-gray-100 leading-tight mb-1">
+                            {{car.brand}} {{car.name}}</h3>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-2">
+                            <span>{{getDefaultVariant(car.id)?.transmission || 'Auto'}}</span>
+                            <span>•</span>
+                            <span>{{getDefaultVariant(car.id)?.fuelType || 'Petrol'}}</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-4 flex gap-2">
+                <div
+                    class="flex items-center text-xs text-gray-400 dark:text-gray-500 mb-6 font-semibold uppercase tracking-wider">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    Provided by <span class="text-gray-900 dark:text-gray-200 ml-1">{{car.admin?.fullName || 'System
+                        Depot'}}</span>
+                </div>
+
+                <!-- Specs row -->
+                <div class="flex gap-2 mb-6 mt-auto">
+                    <div
+                        class="bg-gray-50 dark:bg-gray-700 px-3 py-1.5 rounded-full text-xs font-semibold text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-gray-600">
+                        {{getDefaultVariant(car.id)?.seats}} Seats
+                    </div>
+                    <div *ngIf="car.variants.length > 1"
+                        class="bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50 px-3 py-1.5 rounded-full text-xs font-semibold text-blue-600 dark:text-blue-400">
+                        {{car.variants.length}} Specs Avail.
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="mt-auto">
                     <a [routerLink]="['/cars', car.id]"
-                        class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-center py-2 rounded-lg transition-colors duration-200 font-medium">
-                        View Details
+                        class="w-full block bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black text-center py-4 rounded-2xl transition-all duration-200 font-bold active:scale-95 shadow-md">
+                        Book Now
                     </a>
                 </div>
             </div>

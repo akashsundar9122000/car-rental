@@ -1,41 +1,56 @@
-<div class="min-h-screen bg-black text-white p-6 selection:bg-red-600 selection:text-white">
-    <div class="max-w-4xl mx-auto">
+<div
+    class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 pb-24 px-6 md:px-8 selection:bg-black selection:text-white">
+    <div class="max-w-4xl mx-auto pt-8 md:pt-12">
         <!-- Header / Back Button -->
         <button (click)="goBack()"
-            class="mb-8 flex items-center text-gray-500 hover:text-red-500 transition-colors group">
+            class="mb-8 flex items-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors group bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 px-4 py-2 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none"
                 viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            <span class="uppercase tracking-widest text-xs font-bold">Abort Mission</span>
+            <span class="font-bold text-sm">Back</span>
         </button>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Car Summary (Left Column) -->
             <div class="md:col-span-1 space-y-6">
-                <div class="relative rounded-2xl overflow-hidden border border-gray-800 shadow-2xl group">
-                    <img [src]="car?.imageUrl" [alt]="car?.name"
-                        class="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <p class="text-red-600 font-bold uppercase tracking-wider text-xs mb-1">{{car?.brand}}</p>
-                        <h2 class="text-2xl font-black uppercase italic">{{car?.name}}</h2>
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden border border-gray-100 dark:border-gray-700 shadow-soft group">
+                    <div class="relative h-56 overflow-hidden">
+                        <img [src]="car?.imageUrl" [alt]="car?.name"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-5">
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">
+                            {{car?.brand}}</p>
+                        <h2 class="text-2xl font-black text-gray-900 dark:text-white leading-tight">{{car?.name}}</h2>
                     </div>
                 </div>
 
-                <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-800 backdrop-blur-sm">
-                    <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-4">
-                        <span class="text-gray-500 uppercase tracking-wider text-xs">Daily Rate</span>
-                        <span class="text-xl font-bold text-white">₹{{selectedVariant?.pricePerDay}}</span>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-soft">
+                    <div
+                        class="flex justify-between items-center mb-4 border-b border-gray-100 dark:border-gray-700 pb-4">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Daily Rate</span>
+                        <span
+                            class="text-xl font-black text-gray-900 dark:text-white">₹{{selectedVariant?.pricePerDay}}</span>
                     </div>
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-500 uppercase tracking-wider text-xs">Variant</span>
-                        <span class="text-white font-mono text-sm">{{selectedVariant?.name}}</span>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Variant</span>
+                        <span
+                            class="text-gray-900 dark:text-white font-semibold text-sm">{{selectedVariant?.name}}</span>
+                    </div>
+                    <div
+                        class="flex justify-between items-center mb-3 pb-3 border-b border-gray-100 dark:border-gray-700">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Provider</span>
+                        <span class="text-gray-900 dark:text-white font-semibold text-sm">{{car?.admin?.fullName ||
+                            'Premium
+                            Fleet'}}</span>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-gray-500 uppercase tracking-wider text-xs">Mileage</span>
-                        <span class="text-white font-mono">{{selectedVariant?.mileage}}</span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Mileage</span>
+                        <span class="text-gray-900 dark:text-white font-semibold">{{selectedVariant?.mileage}}</span>
                     </div>
                 </div>
             </div>
@@ -43,46 +58,50 @@
             <!-- Booking Form (Right Column) -->
             <div class="md:col-span-2">
                 <div
-                    class="bg-gray-900/30 p-8 rounded-3xl border border-gray-800 shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                    class="bg-white dark:bg-gray-800 p-8 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-soft-lg">
                     <div class="mb-8">
-                        <h1 class="text-3xl font-black uppercase mb-2">Secure <span class="text-red-600">Asset</span>
+                        <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-2">Book Your Ride
                         </h1>
-                        <p class="text-gray-500 text-sm">Complete the protocol to initiate vehicle handover.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">Complete the details below to confirm your
+                            booking.</p>
                     </div>
 
                     <!-- Success Message -->
                     <div *ngIf="isBooked" class="text-center py-12 animate-[fadeIn_0.5s_ease-out]">
                         <div class="mb-8 relative inline-block">
-                            <div class="absolute inset-0 bg-red-600 rounded-full blur-2xl opacity-20 animate-pulse">
+                            <div class="absolute inset-0 bg-green-500 rounded-full blur-2xl opacity-15 animate-pulse">
                             </div>
-                            <svg class="w-24 h-24 text-red-600 relative z-10 mx-auto" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            <svg class="w-24 h-24 text-green-500 relative z-10 mx-auto" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <h2 class="text-4xl font-black uppercase italic mb-4 text-white">Mission Confirmed!</h2>
-                        <p class="text-gray-400 text-lg mb-8 max-w-md mx-auto">Yayy!!! your booking has been confirmed
+                        <h2 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-4">Booking
+                            Confirmed!</h2>
+                        <p class="text-gray-500 dark:text-gray-400 text-base mb-8 max-w-md mx-auto">Your booking has
+                            been confirmed
                             and you can pay the amount post the trip.</p>
 
                         <div
-                            class="bg-gray-900/50 p-6 rounded-xl border border-gray-800 backdrop-blur-sm max-w-sm mx-auto mb-10">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-gray-500 uppercase tracking-wider text-xs">Vehicle</span>
-                                <span class="text-white font-bold">{{car?.name}}</span>
+                            class="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 max-w-sm mx-auto mb-10">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Vehicle</span>
+                                <span class="text-gray-900 dark:text-white font-bold">{{car?.name}}</span>
                             </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-gray-500 uppercase tracking-wider text-xs">Total Amount</span>
-                                <span class="text-red-500 font-bold text-xl">₹{{totalPrice}}</span>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-500 dark:text-gray-400 text-sm font-medium">Total Amount</span>
+                                <span class="text-gray-900 dark:text-white font-black text-xl">₹{{totalPrice}}</span>
                             </div>
-                            <div class="text-xs text-gray-600 mt-4 pt-4 border-t border-gray-800">
-                                REFERENCE ID: #{{car?.id}}-{{bookingForm.value.startDate | date:'yyyyMMdd'}}
+                            <div
+                                class="text-xs text-gray-400 dark:text-gray-500 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 font-medium">
+                                REF ID: #{{car?.id}}-{{bookingForm.value.startDate | date:'yyyyMMdd'}}
                             </div>
                         </div>
 
                         <a routerLink="/cars"
-                            class="bg-white text-black hover:bg-gray-200 font-black py-4 px-10 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-widest text-sm inline-block cursor-pointer">
-                            Back to Home
+                            class="bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black font-bold py-4 px-10 rounded-xl shadow-md transition-all transform hover:-translate-y-1 active:scale-95 text-sm inline-block cursor-pointer">
+                            Back to Cars
                         </a>
                     </div>
 
@@ -90,79 +109,74 @@
 
                         <!-- Route Selection -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="group">
-                                <label
-                                    class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-red-500 transition-colors">Extraction
-                                    Point (Source)</label>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Pickup
+                                    Location</label>
                                 <input type="text" formControlName="source"
-                                    class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-4 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all placeholder-gray-700 font-mono"
-                                    placeholder="ENTER LOCATION">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 dark:focus:border-white focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all placeholder-gray-400 dark:placeholder-gray-500 font-medium"
+                                    placeholder="Enter pickup location">
                             </div>
-                            <div class="group">
+                            <div>
                                 <label
-                                    class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-red-500 transition-colors">Drop
-                                    Zone (Destination)</label>
+                                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Drop-off
+                                    Location</label>
                                 <input type="text" formControlName="destination"
-                                    class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-4 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all placeholder-gray-700 font-mono"
-                                    placeholder="ENTER LOCATION">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 dark:focus:border-white focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all placeholder-gray-400 dark:placeholder-gray-500 font-medium"
+                                    placeholder="Enter drop-off location">
                             </div>
                         </div>
 
                         <!-- Timeline Selection -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="group">
-                                <label
-                                    class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-red-500 transition-colors">Deployment
-                                    (Start Date)</label>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Start
+                                    Date</label>
                                 <input type="datetime-local" formControlName="startDate"
-                                    class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-4 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-gray-300 font-mono uppercase [color-scheme:dark]">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 dark:focus:border-white focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all font-medium">
                                 <div *ngIf="bookingForm.get('startDate')?.errors?.['pastDate'] && bookingForm.get('startDate')?.touched"
-                                    class="text-red-500 text-xs mt-1 font-bold">ERROR: BACKDATED MISSION PROTOCOL
-                                    UNAVAILABLE</div>
+                                    class="text-red-500 dark:text-red-400 text-xs mt-2 font-semibold bg-red-50 dark:bg-red-900/20 p-2 rounded-lg border border-red-100 dark:border-red-900/30">
+                                    Start date cannot be in the past</div>
                             </div>
-                            <div class="group">
-                                <label
-                                    class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 group-focus-within:text-red-500 transition-colors">Extraction
-                                    (End Date)</label>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">End
+                                    Date</label>
                                 <input type="datetime-local" formControlName="endDate"
-                                    class="w-full bg-black/50 text-white border border-gray-700 rounded-lg px-4 py-4 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-gray-300 font-mono uppercase [color-scheme:dark]">
+                                    class="w-full bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3.5 focus:outline-none focus:border-gray-900 dark:focus:border-white focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all font-medium">
                             </div>
                         </div>
                         <div *ngIf="bookingForm.errors?.['invalidRange'] && bookingForm.get('endDate')?.touched"
-                            class="text-red-500 text-xs font-bold text-center border border-red-900/50 bg-red-900/10 p-2 rounded">
-                            ERROR: TIMELINE PARADOX DETECTED (End Date must be after Start Date)
+                            class="text-red-500 dark:text-red-400 text-xs font-semibold text-center bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 p-3 rounded-xl">
+                            End date must be after the start date
                         </div>
 
                         <!-- Map Display -->
                         <div *ngIf="mapUrl"
-                            class="rounded-xl overflow-hidden border border-gray-800 h-64 shadow-inner relative group mb-6">
+                            class="rounded-2xl overflow-hidden border border-gray-200 h-64 shadow-sm relative group">
                             <iframe [src]="mapUrl" width="100%" height="100%" frameborder="0" style="border:0"
                                 allowfullscreen loading="lazy"
-                                class="opacity-60 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0"></iframe>
-                            <div
-                                class="absolute inset-0 bg-red-900/10 pointer-events-none group-hover:bg-transparent transition-colors">
-                            </div>
+                                class="opacity-80 group-hover:opacity-100 transition-opacity duration-300"></iframe>
                         </div>
 
-                        <!-- Total Price Display -->
                         <!-- Add-ons -->
-                        <div class="py-4 border-t border-gray-800 border-b border-gray-800">
+                        <div
+                            class="py-5 border-t border-gray-100 dark:border-gray-700 border-b border-gray-100 dark:border-gray-700">
                             <label class="flex items-center space-x-4 cursor-pointer group">
                                 <div class="relative">
                                     <input type="checkbox" formControlName="isDriverNeeded" class="peer sr-only">
                                     <div
-                                        class="w-12 h-6 bg-gray-800 rounded-full peer peer-checked:bg-red-900 transition-colors">
+                                        class="w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full peer peer-checked:bg-black dark:peer-checked:bg-white transition-colors">
                                     </div>
                                     <div
-                                        class="absolute left-1 top-1 w-4 h-4 bg-gray-500 rounded-full transition-transform peer-checked:translate-x-6 peer-checked:bg-red-500">
+                                        class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-800 rounded-full transition-transform peer-checked:translate-x-6 shadow-sm">
                                     </div>
                                 </div>
                                 <div>
                                     <span
-                                        class="block text-sm font-bold text-white uppercase tracking-wider group-hover:text-red-500 transition-colors">Tactical
-                                        Driver Required?</span>
-                                    <span class="block text-xs text-gray-600">Professional handler will be assigned to
-                                        this unit (₹500/day).</span>
+                                        class="block text-sm font-bold text-gray-900 dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">Driver
+                                        Needed?</span>
+                                    <span class="block text-xs text-gray-500 dark:text-gray-400">A professional driver
+                                        will be assigned
+                                        (₹500/day).</span>
                                 </div>
                             </label>
                         </div>
@@ -171,40 +185,38 @@
                         <div *ngIf="totalPrice > 0" class="space-y-4">
                             <!-- Breakdown -->
                             <div
-                                class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 space-y-2 text-sm text-gray-400">
-                                <div class="flex justify-between">
-                                    <span>Base Rate ({{diffDays}} days)</span>
-                                    <span>₹{{carCost}}</span>
+                                class="bg-gray-50 dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 space-y-3 text-sm">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-500 dark:text-gray-400 font-medium">Base Rate ({{diffDays}}
+                                        days)</span>
+                                    <span class="text-gray-900 dark:text-white font-semibold">₹{{carCost}}</span>
                                 </div>
-                                <div *ngIf="driverCost > 0" class="flex justify-between text-red-400">
-                                    <span>Tactical Driver ({{diffDays}} days)</span>
-                                    <span>+ ₹{{driverCost}}</span>
+                                <div *ngIf="driverCost > 0" class="flex justify-between items-center">
+                                    <span class="text-gray-500 dark:text-gray-400 font-medium">Driver ({{diffDays}}
+                                        days)</span>
+                                    <span class="text-gray-900 dark:text-white font-semibold">+ ₹{{driverCost}}</span>
                                 </div>
                             </div>
 
                             <!-- Total -->
-                            <div
-                                class="bg-gradient-to-r from-red-900/20 to-black p-6 rounded-xl border border-red-900/30 flex justify-between items-center group">
+                            <div class="bg-black dark:bg-white p-6 rounded-2xl flex justify-between items-center">
                                 <div>
                                     <span
-                                        class="block text-xs text-red-500 font-bold uppercase tracking-widest mb-1">Estimated
-                                        Cost</span>
-                                    <span class="block text-gray-400 text-xs">Total mission funding required</span>
+                                        class="block text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest mb-1">Estimated
+                                        Total</span>
+                                    <span class="block text-gray-400 dark:text-gray-500 text-xs font-medium">Including
+                                        all charges</span>
                                 </div>
                                 <div class="text-right">
-                                    <span
-                                        class="text-3xl font-black text-white group-hover:text-red-500 transition-colors">₹{{totalPrice}}</span>
+                                    <span class="text-3xl font-black text-white dark:text-black">₹{{totalPrice}}</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Submit Button -->
                         <button type="submit" [disabled]="bookingForm.invalid"
-                            class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-5 rounded-xl shadow-[0_10px_30px_rgba(220,38,38,0.2)] hover:shadow-[0_10px_40px_rgba(220,38,38,0.4)] transition-all transform hover:-translate-y-1 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-[0.2em] text-sm relative overflow-hidden group">
-                            <span class="relative z-10">Confirm Deployment</span>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            </div>
+                            class="w-full bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black font-bold py-5 rounded-xl shadow-lg shadow-gray-400/30 dark:shadow-black/50 transition-all transform hover:-translate-y-1 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed text-sm">
+                            Confirm Booking
                         </button>
 
                     </form>

@@ -24,6 +24,10 @@ export class SignupComponent {
     confirmPassword: ['', Validators.required]
   }, { validators: this.passwordMatchValidator });
 
+  errorMsg = '';
+  showPassword = false;
+  showConfirmPassword = false;
+
   passwordMatchValidator(g: any) {
     return g.get('password').value === g.get('confirmPassword').value
       ? null : { 'mismatch': true };
@@ -32,17 +36,28 @@ export class SignupComponent {
   onSubmit() {
     if (this.signupForm.valid) {
       const formValue = this.signupForm.value;
-      // Create user object
       const user: User = {
         id: Math.random().toString(36).substr(2, 9),
-        username: formValue.email!, // Use email as username
+        username: formValue.email!,
         fullName: formValue.fullName!,
         email: formValue.email!,
-        mobileNumber: formValue.mobileNumber!
+        mobileNumber: formValue.mobileNumber!,
+        password: formValue.password!
       };
 
-      this.authService.signup(user);
-      this.router.navigate(['/cars']);
+      this.authService.signup(user).subscribe({
+        next: () => {
+          // Immediately redirect to login, or log them in automatically
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            this.errorMsg = 'Email already in use.';
+          } else {
+            this.errorMsg = 'Signup failed. Please try again.';
+          }
+        }
+      });
     }
   }
 }

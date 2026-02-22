@@ -42,3 +42,21 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Project-specific artifacts
+SpeedsterCarRental.apk
+platform-tools-latest-darwin.zip
+platform-tools/
+tools/
+.claude/
+
+# Android / Capacitor artifacts
+android/build/
+android/.gradle/
+android/jdk-*/
+android/*.tar.gz
+android/local.properties
+
+# Backend artifacts
+car_rental_backend/target/
+car_rental_backend/car_rental.db

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../shared/services/booking';
@@ -13,6 +13,7 @@ import { BookingService } from '../shared/services/booking';
 export class PaymentComponent implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
+    private location = inject(Location);
     private bookingService = inject(BookingService);
     private fb = inject(FormBuilder);
 
@@ -49,6 +50,10 @@ export class PaymentComponent implements OnInit {
         if (!this.bookingId) {
             this.router.navigate(['/profile']);
         }
+    }
+
+    goBack() {
+        this.location.back();
     }
 
     selectMethod(method: string) {
@@ -90,11 +95,20 @@ export class PaymentComponent implements OnInit {
         if (this.bookingId) {
             this.processing = false;
             this.success = true;
-            this.bookingService.updateBookingStatus(this.bookingId, 'Paid');
-
-            setTimeout(() => {
-                this.router.navigate(['/cars']);
-            }, 5000);
+            this.bookingService.updateBookingStatus(this.bookingId, 'PAID').subscribe({
+                next: () => {
+                    setTimeout(() => {
+                        this.router.navigate(['/profile']);
+                    }, 3000);
+                },
+                error: (err) => {
+                    console.error('Failed to update payment status', err);
+                    // Navigate anyway or show error
+                    setTimeout(() => {
+                        this.router.navigate(['/profile']);
+                    }, 3000);
+                }
+            });
         }
     }
 }

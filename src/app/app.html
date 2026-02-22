@@ -1,98 +1,189 @@
-<div class="min-h-screen bg-gray-900 text-gray-100 font-sans">
-  <!-- Navigation Bar -->
-  <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50 shadow-lg">
+<div
+  class="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans pb-20 md:pb-0 transition-colors duration-300">
+  <!-- Desktop Navigation (Hidden on Mobile) -->
+  <nav
+    class="hidden md:block bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-20">
         <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <a [routerLink]="authService.isLoggedIn() ? '/cars' : '/'"
-              class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500 hover:to-white transition-all cursor-pointer">
-              SPEEDSTER
-            </a>
-          </div>
+          <a [routerLink]="authService.isLoggedIn() ? (isAdmin() ? '/admin-dashboard' : '/cars') : '/'"
+            class="text-2xl font-black tracking-tight text-gray-950 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors cursor-pointer">
+            Speedster
+          </a>
         </div>
 
-        <!-- Desktop Navigation -->
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6" *ngIf="authService.isLoggedIn()">
-            <div class="flex items-center space-x-4">
-              <a routerLink="/profile" class="text-gray-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </a>
-              <span class="text-gray-300 text-sm">
-                Welcome, <span class="text-white font-semibold">{{ authService.currentUser()?.fullName }}</span>
-              </span>
-              <button (click)="logout()"
-                class="bg-red-600/20 hover:bg-red-600/40 text-red-400 hover:text-red-300 px-3 py-2 rounded-md text-sm font-medium transition-colors border border-red-900/50">
-                Logout
-              </button>
+        <div class="flex items-center space-x-8" *ngIf="authService.isLoggedIn()">
+          <a routerLink="/cars"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">Vehicles</a>
+          <a routerLink="/profile"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors">Profile</a>
+          <div class="flex items-center space-x-4 pl-8 border-l border-gray-200 dark:border-gray-700">
+            <button (click)="themeService.toggleTheme()"
+              class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+              <svg *ngIf="!themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+              <svg *ngIf="themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </button>
+            <div class="text-sm">
+              <span class="text-gray-500 dark:text-gray-400">Hello,</span>
+              <span class="text-black dark:text-white font-semibold block">{{ authService.currentUser()?.fullName ||
+                'User' }}</span>
             </div>
-          </div>
-          <div class="ml-4 flex items-center md:ml-6" *ngIf="!authService.isLoggedIn()">
-            <a routerLink="/login"
-              class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Login</a>
+            <!-- Profile Avatar Placeholder -->
+            <div
+              class="h-10 w-10 rounded-full bg-gradient-to-tr from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 border-2 border-white dark:border-gray-800 shadow-sm flex items-center justify-center text-gray-600 dark:text-gray-200 font-bold">
+              {{ authService.currentUser()?.fullName?.charAt(0) || 'U' }}
+            </div>
+            <button (click)="logout()"
+              class="ml-4 text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-gray-50 dark:hover:bg-gray-800">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+            </button>
           </div>
         </div>
 
-        <!-- Mobile menu button -->
-        <div class="md:hidden">
-          <button (click)="toggleMobileMenu()" type="button"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-            <svg class="h-6 w-6" [class.hidden]="mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none"
+        <div class="flex items-center space-x-4" *ngIf="!authService.isLoggedIn()">
+          <button (click)="themeService.toggleTheme()"
+            class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+            <svg *ngIf="!themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
               viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
-            <svg class="h-6 w-6" [class.hidden]="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" fill="none"
+            <svg *ngIf="themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
               viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div class="md:hidden" [class.hidden]="!mobileMenuOpen">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800 border-t border-gray-700">
-        <div *ngIf="authService.isLoggedIn()">
-          <div class="px-3 py-2 text-gray-300 text-sm border-b border-gray-700 mb-2">
-            Welcome, <span class="text-white font-semibold">{{ authService.currentUser()?.fullName }}</span>
-          </div>
-          <a routerLink="/profile" (click)="toggleMobileMenu()"
-            class="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            Profile
-          </a>
-          <button (click)="logout()"
-            class="w-full text-left flex items-center px-3 py-2 rounded-md text-base font-medium text-red-400 hover:text-red-300 hover:bg-gray-700 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            Logout
-          </button>
-        </div>
-        <div *ngIf="!authService.isLoggedIn()">
-          <a routerLink="/login" (click)="toggleMobileMenu()"
-            class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors">
-            Login
-          </a>
+          <a routerLink="/login"
+            class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors px-4 py-2">Log
+            in</a>
+          <a routerLink="/signup"
+            class="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors shadow-soft">Sign
+            up</a>
         </div>
       </div>
     </div>
   </nav>
 
+  <!-- Mobile Top Header (Visible only on mobile) -->
+  <header
+    class="md:hidden bg-white/80 dark:bg-gray-950/80 backdrop-blur-md px-6 py-4 sticky top-0 z-40 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+    <div class="flex justify-between items-center">
+      <div *ngIf="authService.isLoggedIn()" class="flex items-center space-x-3">
+        <div
+          class="h-12 w-12 rounded-full bg-gradient-to-tr from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 border-2 border-white dark:border-gray-800 shadow-sm flex items-center justify-center text-gray-600 dark:text-gray-200 text-lg font-bold">
+          {{ authService.currentUser()?.fullName?.charAt(0) || 'U' }}
+        </div>
+        <div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide uppercase">Hello,</p>
+          <p class="text-lg font-bold text-gray-900 dark:text-white leading-tight">{{
+            authService.currentUser()?.fullName || 'Guest' }}
+          </p>
+        </div>
+      </div>
+      <div *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/" class="text-2xl font-black tracking-tight text-gray-950 dark:text-white">Speedster</a>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <button (click)="themeService.toggleTheme()"
+          class="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm text-gray-400 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white border border-gray-100 dark:border-gray-700">
+          <svg *ngIf="!themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg *ngIf="themeService.isDarkMode()" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+
+        <button *ngIf="authService.isLoggedIn()" (click)="logout()"
+          class="p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm text-gray-400 dark:text-gray-300 hover:text-red-500 border border-gray-100 dark:border-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </button>
+        <div *ngIf="!authService.isLoggedIn()" class="flex space-x-2">
+          <a routerLink="/login"
+            class="text-sm font-semibold text-gray-900 dark:text-white px-3 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm dark:border dark:border-gray-700">Log
+            in</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <!-- Main Content -->
-  <main>
+  <main class="w-full">
     <router-outlet></router-outlet>
   </main>
+
+  <nav
+    class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 pb-safe z-50 transition-colors duration-300">
+    <div class="flex justify-around items-center h-16 px-6">
+      <a routerLink="/" routerLinkActive="text-black dark:text-white" [routerLinkActiveOptions]="{exact: true}"
+        class="flex flex-col items-center justify-center w-full h-full text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" [class.stroke-2]="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </a>
+
+      <a routerLink="/cars" routerLinkActive="text-black dark:text-white bg-gray-50 dark:bg-gray-800 rounded-2xl"
+        class="flex flex-col items-center justify-center w-full h-full text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" [class.stroke-2]="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </a>
+
+      <a routerLink="/profile" routerLinkActive="text-black dark:text-white"
+        class="flex flex-col items-center justify-center w-full h-full text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-1" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" [class.stroke-2]="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Global Toast Container -->
+  <div
+    class="fixed bottom-24 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[100] flex flex-col items-center gap-3 w-full max-w-sm px-4 pointer-events-none">
+    @for (toast of toastService.toasts(); track toast.id) {
+    <div
+      class="pointer-events-auto flex items-center justify-between gap-4 w-full px-5 py-4 rounded-2xl shadow-soft-lg transform transition-all duration-300 animate-fade-in-up"
+      [ngClass]="{
+        'bg-gray-900 text-white dark:bg-white dark:text-black': toast.type === 'success',
+        'bg-red-500 text-white dark:bg-red-500 dark:text-white': toast.type === 'error',
+        'bg-white text-gray-900 border border-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-700': toast.type === 'info'
+      }">
+      <span class="font-medium text-sm">{{ toast.message }}</span>
+      <button (click)="toastService.remove(toast.id)" class="opacity-70 hover:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    }
+  </div>
 </div>

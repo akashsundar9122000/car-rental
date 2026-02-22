@@ -1,112 +1,282 @@
-<div class="min-h-screen bg-black text-white p-6 selection:bg-red-600 selection:text-white">
-    <div class="max-w-4xl mx-auto">
+<div class="min-h-screen bg-gray-50 text-gray-900 pb-24 px-6 md:px-8 selection:bg-black selection:text-white">
+    <div class="max-w-4xl mx-auto pt-8 md:pt-12">
 
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-12">
-            <button (click)="goBack()"
-                class="flex items-center text-gray-500 hover:text-red-500 transition-colors group">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span class="uppercase tracking-widest text-xs font-bold">Return to Base</span>
-            </button>
+        <!-- Header & Top Stats Area -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <button (click)="goBack()"
+                    class="flex items-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors group bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 px-4 py-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="font-bold text-sm">Dashboard</span>
+                </button>
 
-            <div class="flex items-center space-x-4">
-                <div class="text-right">
-                    <h1 class="text-xl font-bold text-white">{{ authService.currentUser()?.fullName }}</h1>
-                    <p class="text-xs text-red-500 uppercase tracking-widest">Elite Member</p>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <h1 class="text-xl font-black text-gray-900 dark:text-white">{{
+                            authService.currentUser()?.fullName }}</h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">
+                            Premium Member</p>
+                    </div>
+                    <div
+                        class="w-12 h-12 rounded-full bg-black dark:bg-white flex items-center justify-center text-white dark:text-black font-bold text-xl shadow-md">
+                        {{ authService.currentUser()?.fullName?.charAt(0) || 'U' }}
+                    </div>
                 </div>
-                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-600 to-orange-600 p-[2px]">
-                    <div class="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none"
+            </div>
+
+            <!-- Customer Dashboard Stats -->
+            <div *ngIf="authService.currentUser()?.role !== 'ADMIN'"
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div
+                    class="bg-white dark:bg-gray-800 shadow-soft rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 transition-all hover:shadow-soft-lg group cursor-default">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 mr-1 text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Total Trips
+                    </p>
+                    <div class="flex items-baseline space-x-2 mt-2">
+                        <span class="text-4xl font-black text-gray-900 dark:text-white">{{ totalMissions() }}</span>
+                        <span class="text-sm text-gray-500 font-medium">completed</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-black dark:bg-white text-white dark:text-black shadow-soft rounded-[2rem] p-6 transition-all hover:shadow-lg hover:shadow-gray-400/30 dark:hover:shadow-gray-600/30 cursor-default">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-white dark:text-black"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Active Bookings
+                    </p>
+                    <div class="flex items-baseline space-x-2 mt-2">
+                        <span class="text-4xl font-black text-white dark:text-black">{{ activeMissions() }}</span>
+                        <span class="text-sm text-gray-400 font-medium">in progress</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-gray-800 shadow-soft rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 transition-all hover:shadow-soft-lg cursor-default">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-yellow-500" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
+                        Total Spent
+                    </p>
+                    <div class="flex items-baseline space-x-1 mt-2">
+                        <span class="text-xl font-bold text-gray-400">₹</span>
+                        <span class="text-4xl font-black text-gray-900 dark:text-white">{{ totalSpent() }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dealership Stats -->
+            <div *ngIf="authService.currentUser()?.role === 'ADMIN'"
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div *ngIf="isLoadingAdminData"
+                    class="col-span-1 md:col-span-3 text-center py-10 text-gray-500 uppercase tracking-widest text-sm font-bold animate-pulse">
+                    Loading Dealership Data...
+                </div>
+
+                <ng-container *ngIf="!isLoadingAdminData && salesData()">
+                    <div
+                        class="bg-gradient-to-br from-red-50 to-white dark:from-red-900/10 dark:to-gray-900 shadow-soft rounded-[2rem] p-6 border border-red-100 dark:border-red-900/30 transition-all hover:shadow-soft-lg cursor-default">
+                        <p class="text-xs font-bold text-red-500 uppercase tracking-widest mb-1">Total Revenue</p>
+                        <div class="flex items-baseline space-x-1 mt-2">
+                            <span class="text-xl font-bold text-red-400 dark:text-red-300">₹</span>
+                            <span class="text-4xl font-black text-gray-900 dark:text-white">{{ salesData()?.totalRevenue
+                                |
+                                number:'1.0-0' }}</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-black dark:bg-white text-white dark:text-black shadow-soft rounded-[2rem] p-6 transition-all hover:shadow-lg hover:shadow-gray-400/30 dark:hover:shadow-gray-600/30 cursor-default">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Bookings</p>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="text-4xl font-black text-white dark:text-black">{{ salesData()?.totalBookings
+                                }}</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-gray-800 shadow-soft rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 transition-all hover:shadow-soft-lg cursor-default">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Active Vehicles</p>
+                        <div class="flex items-baseline space-x-2 mt-2">
+                            <span class="text-4xl font-black text-gray-900 dark:text-white">{{ salesData()?.activeCars
+                                }}</span>
+                            <span class="text-sm text-gray-500 font-medium">in fleet</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div *ngIf="authService.currentUser()?.role !== 'ADMIN'"
+                class="flex items-center justify-between pb-4 mb-2">
+                <h2 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Booking History</h2>
+                <a routerLink="/cars"
+                    class="hidden md:flex bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm text-sm font-bold py-2.5 px-6 rounded-full transition-all items-center active:scale-95">
+                    <span class="mr-2">Explore Cars</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bookings List -->
+        <div *ngIf="authService.currentUser()?.role !== 'ADMIN'" class="space-y-6">
+            <div *ngIf="bookings().length === 0"
+                class="text-center py-20 bg-white dark:bg-gray-800 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-700 border-dashed">
+                <p class="text-gray-500 text-lg mb-6 font-medium">No bookings found yet.</p>
+                <a href="/cars"
+                    class="inline-block px-8 py-4 bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black font-bold rounded-2xl transition-all shadow-md active:scale-95">
+                    Start Your Journey
+                </a>
+            </div>
+
+            <div *ngFor="let booking of bookings()"
+                class="bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 hover:shadow-soft-lg transition-all group flex flex-col md:flex-row">
+
+                <!-- Car Image -->
+                <div class="md:w-1/3 relative h-56 md:h-auto overflow-hidden bg-gray-100 dark:bg-gray-900"
+                    *ngIf="booking.variant.car">
+                    <img [src]="booking.variant.car.imageUrl" [alt]="booking.variant.car.name"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
+                </div>
+
+                <!-- Details -->
+                <div class="p-6 md:w-2/3 flex flex-col justify-between flex-1">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div *ngIf="booking.variant.car">
+                                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">{{
+                                    booking.variant.car.brand }}</p>
+                                <h3 class="text-2xl font-black text-gray-900 dark:text-white leading-tight mb-1">{{
+                                    booking.variant.car.name }}
+                                </h3>
+                                <p
+                                    class="text-[10px] text-gray-400 font-bold tracking-widest uppercase flex items-center mt-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                    Provider: <span
+                                        class="text-gray-900 dark:text-white ml-1 group-hover:text-black dark:group-hover:text-white">{{
+                                        booking.variant.car.admin?.fullName ||
+                                        'Official Garage' }}</span>
+                                </p>
+                            </div>
+                            <span class="px-3 py-1.5 rounded-full text-[10px] font-bold border whitespace-nowrap ml-2"
+                                [ngClass]="{
+                                  'bg-orange-50 text-orange-600 border-orange-100': booking.status === 'PENDING',
+                                  'bg-green-50 text-green-600 border-green-100': booking.status === 'PAID' || booking.status === 'COMPLETED'
+                              }">
+                                {{ booking.status === 'PENDING' ? 'Payment Pending' : booking.status }}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-6 text-sm">
+                            <div
+                                class="bg-gray-50 dark:bg-gray-900/50 p-3 rounded-2xl border border-gray-100 dark:border-gray-700">
+                                <span class="block text-[10px] uppercase text-gray-500 font-bold mb-1">Duration</span>
+                                <span class="text-gray-900 dark:text-white font-semibold">{{ booking.startDate |
+                                    date:'MMM d' }} - {{
+                                    booking.endDate | date:'MMM d, y' }}</span>
+                            </div>
+                            <div
+                                class="bg-gray-50 dark:bg-gray-900/50 p-3 rounded-2xl border border-gray-100 dark:border-gray-700">
+                                <span class="block text-[10px] uppercase text-gray-500 font-bold mb-1">Route</span>
+                                <span class="text-gray-900 dark:text-white font-semibold truncate block">{{
+                                    booking.source }} → {{
+                                    booking.destination }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700 flex justify-between items-end">
+                        <div class="mr-4">
+                            <span class="text-[10px] uppercase text-gray-400 font-bold block mb-1">Ref ID</span>
+                            <span class="font-mono text-xs text-gray-500 font-medium">#{{ booking.id }}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-2xl font-black text-gray-900 dark:text-white">₹{{ booking.totalPrice
+                                }}</span>
+                            <a *ngIf="booking.status === 'PENDING'" [routerLink]="['/payment', booking.id]"
+                                class="inline-block mt-3 px-6 py-3 bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black text-xs font-bold rounded-xl shadow-sm transition-transform active:scale-95 uppercase tracking-wide">
+                                Complete Payment
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h2 class="text-3xl font-black uppercase italic mb-8 border-l-4 border-red-600 pl-4">Mission Log</h2>
+        <!-- Danger Zone -->
+        <div class="mt-16 border-t border-red-100 dark:border-red-900/30 pt-8 mb-8 relative z-10">
+            <h3 class="text-sm font-black uppercase tracking-widest text-red-500 mb-4">Danger Zone</h3>
+            <div
+                class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-[2rem] p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-900 dark:text-white font-bold text-lg mb-1">Delete Account</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Permanently delete your account and all
+                        associated data.</p>
+                </div>
+                <button (click)="openDeleteAccountModal()"
+                    class="bg-white dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 font-bold py-3 px-6 rounded-xl text-sm transition-all border border-red-200 dark:border-red-900/30 shadow-sm active:scale-95">
+                    Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
 
-        <!-- Bookings List -->
-        <div class="space-y-6">
-            <div *ngIf="bookings().length === 0"
-                class="text-center py-20 bg-gray-900/30 rounded-3xl border border-gray-800 border-dashed">
-                <p class="text-gray-500 text-lg mb-4">No missions recorded yet.</p>
-                <a href="/cars"
-                    class="inline-block px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-colors uppercase tracking-wider text-sm">
-                    Initiate First Mission
-                </a>
+    <!-- Delete Account Modal -->
+    <div *ngIf="showDeleteAccountModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 w-full max-w-md shadow-2xl">
+            <h3 class="text-2xl font-black text-gray-900 dark:text-white tracking-tight mb-2">Delete <span
+                    class="text-red-600">Account</span></h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">This action is permanent and cannot be undone.
+                Enter your password to
+                confirm.</p>
+
+            <div *ngIf="deleteAccountError"
+                class="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm font-medium">
+                {{ deleteAccountError }}
             </div>
 
-            <div *ngFor="let booking of bookings()"
-                class="bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 hover:border-red-900/50 transition-all hover:bg-gray-900 group">
-                <div class="md:flex">
-                    <!-- Car Image -->
-                    <div class="md:w-1/3 relative h-48 md:h-auto overflow-hidden">
-                        <img [src]="booking.car.imageUrl" [alt]="booking.car.name"
-                            class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-gray-900/90 md:bg-gradient-to-l">
-                        </div>
-                    </div>
+            <div class="group mb-8">
+                <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-2">Enter Password to
+                    Confirm</label>
+                <input type="password" [(ngModel)]="deleteAccountPassword" placeholder="Your password"
+                    class="w-full bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all font-medium placeholder-gray-400 dark:placeholder-gray-500"
+                    (keydown.enter)="confirmDeleteAccount()">
+            </div>
 
-                    <!-- Details -->
-                    <div class="p-6 md:w-2/3 flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-start mb-2">
-                                <div>
-                                    <p class="text-red-500 text-xs font-bold uppercase tracking-widest mb-1">{{
-                                        booking.car.brand }}</p>
-                                    <h3 class="text-2xl font-black uppercase italic text-white">{{ booking.car.name }}
-                                    </h3>
-                                </div>
-                                <span
-                                    class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border"
-                                    [ngClass]="{
-                                      'bg-yellow-900/20 text-yellow-500 border-yellow-900/50': booking.status === 'Payment Pending',
-                                      'bg-green-900/20 text-green-500 border-green-900/50': booking.status === 'Paid'
-                                  }">
-                                    {{ booking.status }}
-                                </span>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 mt-6 text-sm text-gray-400">
-                                <div>
-                                    <span
-                                        class="block text-[10px] uppercase text-gray-600 font-bold mb-1">Duration</span>
-                                    <span class="text-white font-mono">{{ booking.startDate | date:'MMM d' }} - {{
-                                        booking.endDate | date:'MMM d, y' }}</span>
-                                </div>
-                                <div>
-                                    <span class="block text-[10px] uppercase text-gray-600 font-bold mb-1">Route</span>
-                                    <span class="text-white font-mono truncate">{{ booking.source }} → {{
-                                        booking.destination }}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 pt-6 border-t border-gray-800 flex justify-between items-end">
-                            <div>
-                                <span class="text-[10px] uppercase text-gray-600 font-bold block mb-1">Reference
-                                    ID</span>
-                                <span class="font-mono text-xs text-gray-500">#{{ booking.id }}</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="block text-2xl font-black text-white">₹{{ booking.totalPrice }}</span>
-                                <a *ngIf="booking.status === 'Payment Pending'" [routerLink]="['/payment', booking.id]"
-                                    class="text-[10px] text-red-500 font-bold uppercase tracking-wider cursor-pointer hover:text-red-400 underline block mt-2">
-                                    Pay Now ->
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button (click)="cancelDeleteAccount()"
+                    class="flex-1 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-3 rounded-xl transition-all border border-gray-200 dark:border-gray-700 shadow-sm active:scale-95">
+                    Cancel
+                </button>
+                <button (click)="confirmDeleteAccount()" [disabled]="isDeletingAccount || !deleteAccountPassword"
+                    class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {{ isDeletingAccount ? 'Deleting...' : 'Delete Forever' }}
+                </button>
             </div>
         </div>
     </div>
