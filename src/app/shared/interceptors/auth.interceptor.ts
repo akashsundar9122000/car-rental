@@ -5,7 +5,13 @@ import { AuthService } from '../services/auth';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService);
 
-    // Exclude auth routes from interceptor if needed, or if no headers exist, just proceed
+    // Do NOT attach auth headers to login/signup endpoints
+    // This prevents stale credentials from causing 401 errors
+    const isAuthEndpoint = req.url.includes('/auth/login') || req.url.includes('/auth/signup');
+    if (isAuthEndpoint) {
+        return next(req);
+    }
+
     const headers = authService.getAuthHeaders();
 
     if (headers.Authorization) {

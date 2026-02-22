@@ -30,11 +30,8 @@ export class BookingService {
     private bookings = signal<Booking[]>([]);
 
     constructor() {
-        this.loadBookings();
-    }
-
-    private loadBookings() {
-        this.fetchUserBookings().subscribe();
+        // Don't auto-load bookings on construction — wait until user is authenticated
+        // ProfileComponent.ngOnInit() will call fetchUserBookings() explicitly
     }
 
     fetchUserBookings() {
