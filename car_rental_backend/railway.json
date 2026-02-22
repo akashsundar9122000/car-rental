@@ -5,8 +5,7 @@
         "buildCommand": "./mvnw clean package -DskipTests"
     },
     "deploy": {
-        "startCommand": "java -jar target/car_rental_backend-0.0.1-SNAPSHOT.jar",
-        "healthcheckPath": "/api/cars",
+        "startCommand": "java -jar app.jar",
         "restartPolicyType": "ON_FAILURE"
     }
 }
