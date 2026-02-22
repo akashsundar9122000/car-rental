@@ -12,8 +12,8 @@ export class LandingComponent {
     private router = inject(Router);
 
     topTrends = [
-        { name: 'Porsche 911', brand: 'Porsche', type: 'Sport', price: '650', image: 'https://images.unsplash.com/photo-1503376713284-5a6fb8ea661c?w=800&q=80', rating: 5.0, trips: 142 },
-        { name: 'Toyota Supra', brand: 'Toyota', type: 'Coupe', price: '320', image: 'https://images.unsplash.com/photo-1620882772552-320dae0026e9?w=800&q=80', rating: 4.8, trips: 89 },
+        { name: 'Porsche 911', brand: 'Porsche', type: 'Sport', price: '650', image: 'https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=800&q=80', rating: 5.0, trips: 142 },
+        { name: 'Toyota Supra', brand: 'Toyota', type: 'Coupe', price: '320', image: 'https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=800&q=80', rating: 4.8, trips: 89 },
         { name: 'Audi R8', brand: 'Audi', type: 'Sport', price: '700', image: 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=800&q=80', rating: 4.9, trips: 210 }
     ];
 
