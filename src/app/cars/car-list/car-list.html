@@ -43,12 +43,26 @@
         }
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Loading Skeleton -->
+    <div *ngIf="isLoading()" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let _ of [1,2,3,4,5,6]"
+            class="bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 animate-pulse">
+            <div class="h-56 md:h-64 bg-gray-200 dark:bg-gray-700"></div>
+            <div class="p-6">
+                <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded-xl w-3/4 mb-3"></div>
+                <div class="h-4 bg-gray-100 dark:bg-gray-600 rounded-lg w-1/2 mb-6"></div>
+                <div class="h-4 bg-gray-100 dark:bg-gray-600 rounded-lg w-1/3 mb-6"></div>
+                <div class="h-12 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading()" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @for (car of filteredCars(); track car.id; let i = $index) {
         <div class="bg-white dark:bg-gray-800 rounded-[2rem] overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 group flex flex-col hover:-translate-y-1 opacity-0 animate-fade-in-up"
-            [style.animation-delay]="(i * 100) + 'ms'">
+            [style.animation-delay]="(i * 30) + 'ms'">
             <div class="relative h-56 md:h-64 overflow-hidden rounded-t-[2rem]">
-                <img [src]="car.imageUrl" [alt]="car.name"
+                <img [src]="car.imageUrl" [alt]="car.name" loading="lazy"
                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
 
                 <!-- Price Badge -->

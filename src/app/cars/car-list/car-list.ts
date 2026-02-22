@@ -55,8 +55,17 @@ export class CarList {
     this.activeCategory.set(category);
   }
 
+  isLoading = signal(false);
+
   ngOnInit() {
-    this.carService.fetchCars().subscribe();
+    // Only fetch if cars haven't been loaded yet
+    if (this.cars().length === 0) {
+      this.isLoading.set(true);
+      this.carService.fetchCars().subscribe({
+        next: () => this.isLoading.set(false),
+        error: () => this.isLoading.set(false)
+      });
+    }
   }
 
   getDefaultVariant(carId: string) {

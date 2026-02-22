@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Car, CarVariant, CarScrapeResult } from '../models/car';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class CarService {
   private readonly API_URL = `${environment.apiUrl}/cars`;
 
   private cars = signal<Car[]>([]);
+  private carsLoaded = false;
   private favoriteCarIds = signal<Set<string>>(new Set(this.getFavoritesFromStorage()));
 
   constructor() {
@@ -52,10 +53,15 @@ export class CarService {
     this.fetchCars().subscribe();
   }
 
-  fetchCars() {
-    this.cars.set([]);
+  fetchCars(forceRefresh = false) {
+    if (this.carsLoaded && !forceRefresh) {
+      return of(this.cars());
+    }
     return this.http.get<Car[]>(this.API_URL).pipe(
-      tap(data => this.cars.set(data)),
+      tap(data => {
+        this.cars.set(data);
+        this.carsLoaded = true;
+      }),
       tap({ error: (err) => console.error('Failed to load cars', err) })
     );
   }
