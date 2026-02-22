@@ -27,8 +27,7 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 [INFO] skip non existing resourceDirectory /Users/akash/.gemini/antigravity/scratch/car_rental_app/car_rental_backend/src/test/resources
 [INFO] 
 [INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ car_rental_backend ---
-[INFO] Changes detected - recompiling the module! :source
-[INFO] Compiling 4 source files with javac [debug release 17] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
 [INFO] <<< spring-boot:3.2.3:run (default-cli) < test-compile @ car_rental_backend <<<
 [INFO] 
@@ -44,297 +43,43 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.3)
 
-2026-02-22T22:04:48.813+05:30  INFO 46788 --- [           main] com.carrental.app.CarRentalApplication   : Starting CarRentalApplication using Java 25.0.1 with PID 46788 (/Users/akash/.gemini/antigravity/scratch/car_rental_app/car_rental_backend/target/classes started by akash in /Users/akash/.gemini/antigravity/scratch/car_rental_app/car_rental_backend)
-2026-02-22T22:04:48.814+05:30  INFO 46788 --- [           main] com.carrental.app.CarRentalApplication   : No active profile set, falling back to 1 default profile: "default"
-2026-02-22T22:04:49.042+05:30  INFO 46788 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-02-22T22:04:49.065+05:30  INFO 46788 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 6 JPA repository interfaces.
+2026-02-22T22:24:03.159+05:30  INFO 55701 --- [           main] com.carrental.app.CarRentalApplication   : Starting CarRentalApplication using Java 25.0.1 with PID 55701 (/Users/akash/.gemini/antigravity/scratch/car_rental_app/car_rental_backend/target/classes started by akash in /Users/akash/.gemini/antigravity/scratch/car_rental_app/car_rental_backend)
+2026-02-22T22:24:03.160+05:30  INFO 55701 --- [           main] com.carrental.app.CarRentalApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-02-22T22:24:03.396+05:30  INFO 55701 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-22T22:24:03.416+05:30  INFO 55701 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 6 JPA repository interfaces.
 WARNING: A restricted method in java.lang.System has been called
 WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/akash/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar)
 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
-2026-02-22T22:04:49.257+05:30  INFO 46788 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-02-22T22:04:49.262+05:30  INFO 46788 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-02-22T22:04:49.262+05:30  INFO 46788 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
-2026-02-22T22:04:49.280+05:30  INFO 46788 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-02-22T22:04:49.281+05:30  INFO 46788 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 452 ms
-2026-02-22T22:04:49.337+05:30  INFO 46788 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-02-22T22:04:49.359+05:30  INFO 46788 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2026-02-22T22:04:49.369+05:30  INFO 46788 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-02-22T22:04:49.457+05:30  INFO 46788 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-02-22T22:04:49.467+05:30  INFO 46788 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-02-22T22:04:53.455+05:30  INFO 46788 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@14a1769d
-2026-02-22T22:04:53.456+05:30  INFO 46788 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-02-22T22:04:53.826+05:30  WARN 46788 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-02-22T22:04:54.875+05:30  INFO 46788 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-02-22T22:05:05.047+05:30  INFO 46788 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-02-22T22:05:05.322+05:30  WARN 46788 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-02-22T22:05:05.421+05:30  INFO 46788 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6662974a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4fce655d, org.springframework.security.web.context.SecurityContextHolderFilter@489c15e2, org.springframework.security.web.header.HeaderWriterFilter@61d4155b, org.springframework.web.filter.CorsFilter@df5f657, org.springframework.security.web.authentication.logout.LogoutFilter@60510791, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4a5c6b30, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@938e54a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@220d7eb7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@68908be7, org.springframework.security.web.access.ExceptionTranslationFilter@22c0c0bc, org.springframework.security.web.access.intercept.AuthorizationFilter@78a7fccd]
-2026-02-22T22:05:05.491+05:30  INFO 46788 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2026-02-22T22:05:05.495+05:30  INFO 46788 --- [           main] com.carrental.app.CarRentalApplication   : Started CarRentalApplication in 16.803 seconds (process running for 16.919)
+2026-02-22T22:24:03.607+05:30  INFO 55701 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-22T22:24:03.611+05:30  INFO 55701 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-22T22:24:03.611+05:30  INFO 55701 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-02-22T22:24:03.629+05:30  INFO 55701 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-22T22:24:03.630+05:30  INFO 55701 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 454 ms
+2026-02-22T22:24:03.690+05:30  INFO 55701 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-22T22:24:03.713+05:30  INFO 55701 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-02-22T22:24:03.724+05:30  INFO 55701 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-22T22:24:03.804+05:30  INFO 55701 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-22T22:24:03.813+05:30  INFO 55701 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-22T22:24:06.939+05:30  INFO 55701 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@117b2cc6
+2026-02-22T22:24:06.940+05:30  INFO 55701 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-22T22:24:07.049+05:30  WARN 55701 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-22T22:24:07.588+05:30  INFO 55701 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-22T22:24:09.669+05:30  INFO 55701 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-22T22:24:09.888+05:30  WARN 55701 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-22T22:24:09.999+05:30  INFO 55701 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@16eb01d4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4246f904, org.springframework.security.web.context.SecurityContextHolderFilter@29088d3d, org.springframework.security.web.header.HeaderWriterFilter@439b0198, org.springframework.web.filter.CorsFilter@5b01b3f8, org.springframework.security.web.authentication.logout.LogoutFilter@306c8e09, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7f65639e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5390862e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4fccdd1d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27c49f54, org.springframework.security.web.access.ExceptionTranslationFilter@6600d07d, org.springframework.security.web.access.intercept.AuthorizationFilter@a1689e8]
+2026-02-22T22:24:10.068+05:30  INFO 55701 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-02-22T22:24:10.072+05:30  INFO 55701 --- [           main] com.carrental.app.CarRentalApplication   : Started CarRentalApplication in 7.039 seconds (process running for 7.155)
 Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
 Hibernate: select count(*) from cars c1_0
-Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
 Running Database Fixer...
 Updated 0 cars to belong to admin: 2cb0d4f8-7383-4265-b98f-ba6efbf63d63
-2026-02-22T22:05:13.067+05:30  INFO 46788 --- [0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-22T22:05:13.067+05:30  INFO 46788 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-02-22T22:05:13.068+05:30  INFO 46788 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-Hibernate: select c1_0.id,c1_0.admin_id,c1_0.brand,c1_0.default_variant_id,c1_0.description,c1_0.image_url,c1_0.name from cars c1_0
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-java.lang.RuntimeException: Invalid credentials
-	at com.carrental.app.service.AuthService.login(AuthService.java:42)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
-	at com.carrental.app.service.AuthService$$SpringCGLIB$$0.login(<generated>)
-	at com.carrental.app.controller.AuthController.login(AuthController.java:33)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:181)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:1474)
 Hibernate: select u1_0.id from users u1_0 where u1_0.email=? fetch first ? rows only
-Hibernate: insert into users (created_at,email,full_name,password_hash,role,id) values (?,?,?,?,?,?)
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select c1_0.id,c1_0.admin_id,c1_0.brand,c1_0.default_variant_id,c1_0.description,c1_0.image_url,c1_0.name from cars c1_0
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select c1_0.id,c1_0.admin_id,c1_0.brand,c1_0.default_variant_id,c1_0.description,c1_0.image_url,c1_0.name from cars c1_0
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
+2026-02-22T22:24:17.355+05:30  INFO 55701 --- [0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-22T22:24:17.355+05:30  INFO 55701 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-22T22:24:17.356+05:30  INFO 55701 --- [0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
 Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
 Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
 Hibernate: select b1_0.id,b1_0.created_at,b1_0.destination,b1_0.end_date,b1_0.is_driver_needed,b1_0.source,b1_0.start_date,b1_0.status,b1_0.total_price,b1_0.user_id,b1_0.variant_id from bookings b1_0 left join users u1_0 on u1_0.id=b1_0.user_id where u1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select cv1_0.id,c1_0.id,c1_0.admin_id,a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role,c1_0.brand,c1_0.default_variant_id,c1_0.description,c1_0.image_url,c1_0.name,cv1_0.drive_type,cv1_0.engine_capacity,cv1_0.fuel_type,cv1_0.mileage,cv1_0.name,cv1_0.price_per_day,cv1_0.seats,cv1_0.transmission from car_variants cv1_0 left join cars c1_0 on c1_0.id=cv1_0.car_id left join admins a1_0 on a1_0.id=c1_0.admin_id where cv1_0.id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: insert into bookings (created_at,destination,end_date,is_driver_needed,source,start_date,status,total_price,user_id,variant_id,id) values (?,?,?,?,?,?,?,?,?,?,?)
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.email=?
-Hibernate: select u1_0.id,u1_0.created_at,u1_0.email,u1_0.full_name,u1_0.password_hash,u1_0.role from users u1_0 where u1_0.email=?
-Hibernate: select c1_0.id,c1_0.admin_id,c1_0.brand,c1_0.default_variant_id,c1_0.description,c1_0.image_url,c1_0.name from cars c1_0
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select a1_0.id,a1_0.created_at,a1_0.email,a1_0.full_name,a1_0.password_hash,a1_0.role from admins a1_0 where a1_0.id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select v1_0.car_id,v1_0.id,v1_0.drive_type,v1_0.engine_capacity,v1_0.fuel_type,v1_0.mileage,v1_0.name,v1_0.price_per_day,v1_0.seats,v1_0.transmission from car_variants v1_0 where v1_0.car_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
-Hibernate: select f1_0.variant_id,f1_0.feature from variant_features f1_0 where f1_0.variant_id=?
