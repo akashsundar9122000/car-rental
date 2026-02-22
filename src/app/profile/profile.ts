@@ -24,6 +24,8 @@ export class ProfileComponent {
     bookings = this.bookingService.getBookings();
     salesData = signal<SalesData | null>(null);
     isLoadingAdminData = false;
+    errorMessage = signal<string | null>(null);
+
 
     // Dashboard Metrics
     totalMissions = computed(() => this.bookings().length);
@@ -35,24 +37,42 @@ export class ProfileComponent {
 
     ngOnInit() {
         const user = this.authService.currentUser();
+        console.log('ProfileComponent: Current User:', user);
+
+        if (!user) {
+            this.errorMessage.set('User session not found. Please log in again.');
+            return;
+        }
+
         if (user?.role === 'ADMIN') {
             this.isLoadingAdminData = true;
+            this.errorMessage.set(null);
             this.adminService.getSalesData().subscribe({
                 next: (data) => {
+                    console.log('ProfileComponent: Sales Data loaded:', data);
                     this.salesData.set(data);
                     this.isLoadingAdminData = false;
                     this.cdr.detectChanges();
                 },
                 error: (err) => {
                     console.error('Failed to fetch admin stats:', err);
+                    this.errorMessage.set('Failed to load dealership data. Please check your connection.');
                     this.isLoadingAdminData = false;
                     this.cdr.detectChanges();
                 }
             });
         } else {
-            this.bookingService.fetchUserBookings().subscribe();
+            this.errorMessage.set(null);
+            this.bookingService.fetchUserBookings().subscribe({
+                next: (data) => console.log('ProfileComponent: Bookings loaded:', data),
+                error: (err) => {
+                    console.error('Failed to fetch bookings:', err);
+                    this.errorMessage.set('Failed to load booking history. Please try again.');
+                }
+            });
         }
     }
+
 
     goBack() {
         this.location.back();

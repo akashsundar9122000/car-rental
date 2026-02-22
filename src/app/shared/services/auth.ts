@@ -7,11 +7,8 @@ export interface User {
   id: string;
   email: string;
   fullName: string;
-  role?: string;
-  // properties present in frontend interface but missing in backend
-  username?: string;
   mobileNumber?: string;
-  password?: string; // for signup request
+  role?: string;
   token?: string; // Basic Auth token (base64 email:password)
 }
 
@@ -48,11 +45,12 @@ export class AuthService {
     );
   }
 
-  signup(user: User) {
+  signup(user: any) {
     return this.http.post<User>(`${this.API_URL}/signup`, {
       email: user.email,
       password: user.password,
-      fullName: user.fullName
+      fullName: user.fullName,
+      mobileNumber: user.mobileNumber
     }).pipe(
       tap(savedUser => {
         if (user.password) {
@@ -66,7 +64,7 @@ export class AuthService {
     );
   }
 
-  adminSignup(user: User) {
+  adminSignup(user: any) {
     return this.http.post<User>(`${environment.apiUrl}/admin/auth/signup`, {
       email: user.email,
       password: user.password,

@@ -1,0 +1,31 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/:path*",
+            "destination": "https://appealing-charm-production-b55f.up.railway.app/api/:path*"
+        },
+        {
+            "source": "/((?!assets/).*)",
+            "destination": "/index.html"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/api/:path*",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                },
+                {
+                    "key": "Access-Control-Allow-Methods",
+                    "value": "GET,POST,PUT,DELETE,OPTIONS"
+                },
+                {
+                    "key": "Access-Control-Allow-Headers",
+                    "value": "*"
+                }
+            ]
+        }
+    ]
+}

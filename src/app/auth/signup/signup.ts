@@ -36,9 +36,7 @@ export class SignupComponent {
   onSubmit() {
     if (this.signupForm.valid) {
       const formValue = this.signupForm.value;
-      const user: User = {
-        id: Math.random().toString(36).substr(2, 9),
-        username: formValue.email!,
+      const user = {
         fullName: formValue.fullName!,
         email: formValue.email!,
         mobileNumber: formValue.mobileNumber!,

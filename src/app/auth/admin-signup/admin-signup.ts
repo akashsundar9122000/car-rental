@@ -43,9 +43,7 @@ export class AdminSignupComponent {
         return;
       }
 
-      const user: User = {
-        id: Math.random().toString(36).substr(2, 9),
-        username: formValue.email!,
+      const user = {
         fullName: formValue.fullName!,
         email: formValue.email!,
         password: formValue.password!
