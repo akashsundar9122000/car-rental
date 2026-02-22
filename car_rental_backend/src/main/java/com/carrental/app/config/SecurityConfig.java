@@ -28,22 +28,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity in this MVP
+                .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Allow customer auth endpoints
-                        .requestMatchers("/api/admin/auth/**").permitAll() // Allow admin auth endpoints
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/cars/**").permitAll() // Allow
-                                                                                                              // public
-                                                                                                              // access
-                                                                                                              // to view
-                                                                                                              // cars
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/reviews/**").permitAll() // Allow
-                                                                                                                 // public
-                                                                                                                 // access
-                                                                                                                 // to
-                                                                                                                 // view
-                                                                                                                 // reviews
+                        .requestMatchers("/api/auth/**", "/api/auth/login", "/api/auth/signup").permitAll()
+                        .requestMatchers("/api/admin/auth/**", "/api/admin/auth/login", "/api/admin/auth/signup")
+                        .permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/cars", "/api/cars/**")
+                        .permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/reviews", "/api/reviews/**")
+                        .permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/cars/scrape").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/cars/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/cars/**").hasRole("ADMIN")
@@ -55,9 +49,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/dashboard/**").hasRole("ADMIN")
                         .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/bookings/**").authenticated()
                         .requestMatchers("/api/bookings/all").hasRole("ADMIN")
-                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/error", "/favicon.ico").permitAll()
                         .anyRequest().authenticated())
-                .httpBasic(org.springframework.security.config.Customizer.withDefaults()); // Enable Basic Auth
+                .httpBasic(org.springframework.security.config.Customizer.withDefaults());
 
         return http.build();
     }
@@ -78,7 +72,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("*")); // Allow all for dev including capacitor
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
